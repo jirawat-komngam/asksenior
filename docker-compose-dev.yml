@@ -1,0 +1,23 @@
+# ONLY USE DOCKER COMPOSE FOR LOCAL ENV
+# In production, we use Kubernetes
+version: "3"
+services:
+  cassandra:
+    image: cassandra:4.0
+    ports:
+      - 9042:9042
+    volumes:
+      - ~/apps/cassandra:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=cloudinfra
+  cache:
+    image: redis:7.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass 123456
+    volumes: 
+      - cache:/data
+volumes:
+  cache:
+    driver: local

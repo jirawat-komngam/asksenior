@@ -1,0 +1,22 @@
+type Query {
+    universities: [University!]!
+}
+
+type University {
+    universityID: ID!
+    universityName: String!
+    universityShortName: String!
+    universityOrder: Int!
+    faculties: [Faculty!]!
+}
+
+type Faculty {
+    facultyID: ID!
+    facultyName: String!
+    fields: [Field!]!
+}
+
+type Field {
+    fieldID: ID!
+    fieldName: String!
+}
