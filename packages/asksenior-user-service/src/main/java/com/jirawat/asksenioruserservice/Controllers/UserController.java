@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.jirawat.asksenioruserservice.DTOs.ResponseDTO;
 import com.jirawat.asksenioruserservice.RequestBodyPOJOs.PostUserRequestBodyPOJO;
-import com.jirawat.asksenioruserservice.Services.UserServiceServices;
+import com.jirawat.asksenioruserservice.Services.UserService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(path = "/api/v1/users")
 public class UserController {
     @Autowired
-    private UserServiceServices userService;
+    private UserService userService;
 
     @PostMapping(path = "/")
     public ResponseEntity<ResponseDTO<String, String>> postUser(

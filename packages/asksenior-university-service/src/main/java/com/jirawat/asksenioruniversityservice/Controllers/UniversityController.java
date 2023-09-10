@@ -25,6 +25,6 @@ public class UniversityController {
     public ResponseEntity<SuccessResponseDTO<List<UniversityDTO>>> getUniversities()
             throws JsonMappingException, JsonProcessingException {
         return new ResponseEntity<>(new SuccessResponseDTO<>(universityService.getUniversities()),
-                HttpStatus.BAD_GATEWAY);
+                HttpStatus.OK);
     }
 }
