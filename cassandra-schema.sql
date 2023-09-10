@@ -30,7 +30,7 @@ CREATE TABLE users(
 );
 CREATE INDEX ON users (userEmail);
 
-
+INSERT INTO users (userid, username, userEmail, useryear, fieldid) VALUES ('8a271090-67d5-403b-994a-842f139aa7c3', 'test', 'test.mail@kmutt.com');
 -- Post Service
 DROP KEYSPACE asksenior_post_service;
 CREATE KEYSPACE asksenior_post_service WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3};
