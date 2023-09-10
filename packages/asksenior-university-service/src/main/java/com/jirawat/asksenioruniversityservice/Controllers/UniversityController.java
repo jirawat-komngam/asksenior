@@ -3,6 +3,8 @@ package com.jirawat.asksenioruniversityservice.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +22,9 @@ public class UniversityController {
     private UniversityService universityService;
 
     @GetMapping
-    public SuccessResponseDTO<List<UniversityDTO>> getUniversities()
+    public ResponseEntity<SuccessResponseDTO<List<UniversityDTO>>> getUniversities()
             throws JsonMappingException, JsonProcessingException {
-        return new SuccessResponseDTO<>(universityService.getUniversities());
+        return new ResponseEntity<>(new SuccessResponseDTO<>(universityService.getUniversities()),
+                HttpStatus.BAD_GATEWAY);
     }
 }

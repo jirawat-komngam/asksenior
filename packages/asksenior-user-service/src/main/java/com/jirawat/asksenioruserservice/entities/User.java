@@ -1,4 +1,6 @@
-package com.jirawat.asksenioruserservice.entities;
+package com.jirawat.asksenioruserservice.Entities;
+
+import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.mapping.Table;
@@ -10,10 +12,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(value = "user")
+@Table(value = "users")
 public class User {
     @Id
-    private String userID;
+    private UUID userID;
     private String userName;
     private String userEmail;
     private Integer userYear;

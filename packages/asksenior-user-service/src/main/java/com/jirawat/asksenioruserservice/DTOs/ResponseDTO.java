@@ -1,10 +1,14 @@
 package com.jirawat.asksenioruserservice.DTOs;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class SuccessResponseDTO<T> {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ResponseDTO<T, E> {
     private T data;
+    private E error;
 }
