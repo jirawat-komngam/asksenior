@@ -41,7 +41,7 @@ public class UserServiceServices {
         log.info(String.format("recieve email %s and ready for create otp", userEmail));
 
         OTPGeneratorHelper newOTPgen = new OTPGeneratorHelper();
-        String otp = newOTPgen.OTPgenerate();
+        String otp = newOTPgen.otpGenerate();
         log.info(String.format("create otp %s complete by user email is %s", otp, userEmail));
 
         String email = userEmail;
