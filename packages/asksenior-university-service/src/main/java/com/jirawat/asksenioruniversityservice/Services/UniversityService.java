@@ -32,14 +32,14 @@ public class UniversityService {
         var universities = repository.findAll();
         for (University eachUniversity : universities) {
             try {
-                log.info(String.format("try to map university id %s", eachUniversity.getUniversityID()));
+                log.info("try to map university id {}", eachUniversity.getUniversityID());
                 var universityDTO = mapEachUniversityToUniversityDTO(eachUniversity);
 
-                log.info(String.format("add mapped university id %s to output", eachUniversity.getUniversityID()));
+                log.info("add mapped university id {} to output", eachUniversity.getUniversityID());
                 output.add(universityDTO);
             } catch (Exception exception) {
-                log.warn(String.format("there is a mapping error on university id %s",
-                        eachUniversity.getUniversityID()));
+                log.warn("there is a mapping error on university id {}",
+                        eachUniversity.getUniversityID());
                 log.warn("error details", exception);
                 continue;
             }
@@ -51,10 +51,10 @@ public class UniversityService {
 
     private UniversityDTO mapEachUniversityToUniversityDTO(University eachUniversity)
             throws JsonMappingException, JsonProcessingException {
-        log.info(String.format("mapping university id %s", eachUniversity.getUniversityID()));
+        log.info("mapping university id {}", eachUniversity.getUniversityID());
         UniversityDTO mappedUniversity = UniversityMapper.INSTANCE.universityToUniversityDTO(eachUniversity);
 
-        log.info(String.format("mapping new faculty for university id %s", eachUniversity.getUniversityID()));
+        log.info("mapping new faculty for university id {}", eachUniversity.getUniversityID());
         FacultyInsideUniversity facultyInsideUniversity = JsonHelper.parse(eachUniversity.getFaculties(),
                 FacultyInsideUniversity.class);
         mappedUniversity.setFaculties(facultyInsideUniversity.getData());
