@@ -24,12 +24,12 @@ public class UserController {
     @PostMapping(path = "/")
     public ResponseEntity<ResponseDTO<String, String>> postUser(
             @RequestBody PostUserRequestBodyPOJO postUserRequestBodyPOJO) {
-        log.info(String.format("post user request by %s and email is %s",
-                postUserRequestBodyPOJO.getUserEmail(), postUserRequestBodyPOJO.getOtp()));
+        log.info("post user request by : {} and otp is : {}",
+                postUserRequestBodyPOJO.getUserEmail(), postUserRequestBodyPOJO.getOtp());
 
         Boolean verified = userService.verifiedOTP(postUserRequestBodyPOJO.getOtp(),
                 postUserRequestBodyPOJO.getUserEmail());
-        log.info(String.format("verified is %s", verified));
+        log.info("verified is : {}", verified);
         if (verified == true) {
             userService.upsertUser(postUserRequestBodyPOJO.getUserEmail());
             userService.signToken(postUserRequestBodyPOJO.getUserEmail());
@@ -41,7 +41,7 @@ public class UserController {
 
     @GetMapping(path = "/email/{userEmail}")
     public ResponseEntity<ResponseDTO<String, String>> getUserByEmail(@PathVariable("userEmail") String userEmail) {
-        log.info(String.format("get user request by email %s", userEmail));
+        log.info("get user request by email : {}", userEmail);
 
         Boolean validateEmail = userService.validateWhetherItIsUniversityEmail(userEmail);
         if (validateEmail == false) {

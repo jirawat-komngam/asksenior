@@ -20,7 +20,7 @@ public class UserService {
     private UserRepository repository;
 
     public Boolean validateWhetherItIsUniversityEmail(String userEmail) {
-        log.info(String.format("validateWhetherItIsUniversityEmail service by email %s", userEmail));
+        log.info("validateWhetherItIsUniversityEmail service by email : {}", userEmail);
 
         Boolean checkUniversityWord = false;
         if (userEmail != null) {
@@ -32,25 +32,26 @@ public class UserService {
                 checkUniversityWord = true;
             }
         }
-
-        log.info(String.format("check UniversityWord successfully and result is %s", checkUniversityWord));
+        // logger.warn("Batch Response contained a response key not in request batch :
+        // {}", responseKey);
+        log.info("check UniversityWord successfully and result is : {}", checkUniversityWord);
         return checkUniversityWord;
     }
 
     public void createOTP(String userEmail) {
-        log.info(String.format("recieve email %s and ready for create otp", userEmail));
+        log.info("recieve email {} and ready for create otp", userEmail);
 
         OTPGeneratorHelper newOTPgen = new OTPGeneratorHelper();
         String otp = newOTPgen.otpGenerate();
-        log.info(String.format("create otp %s complete by user email is %s", otp, userEmail));
+        log.info("create otp {} complete by user email is {}", otp, userEmail);
 
         String email = userEmail;
-        log.info(String.format("send otp : %s  and email : %s to redis", otp, email));
+        log.info("send otp : {}  and email : {}to redis", otp, email);
         sendEmail(userEmail, otp);
     }
 
     public void sendEmail(String userEmail, String otp) {
-        log.info(String.format("send otp : %s to email : %s success", otp, userEmail));
+        log.info("send otp : {} to email : {} success", otp, userEmail);
     }
 
     public void signToken(String userEmail) {
@@ -61,35 +62,35 @@ public class UserService {
     }
 
     public void upsertUser(String userEmail) {
-        log.info(String.format("upsertUser ready by userEmail %s", userEmail));
+        log.info("upsertUser ready by userEmail {}", userEmail);
 
         User getUser = repository.findByUserEmail(userEmail);
         if (getUser != null) {
-            log.info(String.format("upsertUser not null case by userEmail %s", userEmail));
+            log.info("userEmail {} is already used ", userEmail);
             return;
         }
 
-        log.info(String.format("upsertUser null case by userEmail %s", userEmail));
+        log.info("upsertUser case by userEmail {}", userEmail);
 
         UUID uuid = UUID.randomUUID();
-        log.info(String.format("new userID is %s", uuid.toString()));
+        log.info("new userID is {}", uuid.toString());
 
         User newUser = new User();
         newUser.setUserEmail(userEmail);
         newUser.setUserID(uuid);
         repository.save(newUser);
-        log.info(String.format("save successfully with id %s", uuid));
+        log.info("save successfully with id {}", uuid);
     }
 
     public Boolean verifiedOTP(String otp, String userEmail) {
-        log.info(String.format("Verified otp with email : %s", userEmail));
+        log.info("Verified otp with email : {}", userEmail);
 
         Boolean verified = false;
         Map<String, String> rediskey = new HashMap<String, String>();
         rediskey.put("123", "asdad@kmutt.com");
 
         String redismail = rediskey.get(otp);
-        log.info(String.format("redis data is : %s", rediskey.get(otp)));
+        log.info("redis data is : {}", rediskey.get(otp));
         if (redismail == null) {
             return false;
         }
@@ -97,7 +98,7 @@ public class UserService {
             verified = true;
         }
 
-        log.info(String.format("verify value is %s", verified));
+        log.info("verify value is {}", verified);
         return verified;
     }
 
