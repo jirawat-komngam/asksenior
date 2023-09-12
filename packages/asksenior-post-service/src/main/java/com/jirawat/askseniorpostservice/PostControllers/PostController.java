@@ -56,7 +56,7 @@ public class PostController {
     }
 
     @PostMapping(path = "/")
-    public ResponseEntity<ResponseDTO<String, String>> postMethodName(@RequestBody Post newPost) {
+    public ResponseEntity<ResponseDTO<String, String>> postNewPost(@RequestBody Post newPost) {
         return new ResponseEntity<>(new ResponseDTO<>("ok", null), HttpStatus.OK);
     }
 
