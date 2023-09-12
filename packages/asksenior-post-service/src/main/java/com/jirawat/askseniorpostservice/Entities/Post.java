@@ -20,6 +20,6 @@ public class Post {
     private UUID fieldID;
     private String postDescription;
     private String postTitle;
-    private String userID;
+    private UUID userID;
     private String userName;
 }
