@@ -6,14 +6,19 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.jirawat.askseniorpostservice.DTOs.PostDTO;
+import com.jirawat.askseniorpostservice.Entities.Comment;
 import com.jirawat.askseniorpostservice.Entities.Post;
 
 @Service
 public class PostService {
-    public List<Post> getPostByPostID(UUID postID) {
-        List<Post> newPostListExample = new ArrayList<>();
-        Post newPostExample = new Post();
-        newPostExample.setComment("asdasdasdweee");
+    public List<PostDTO> getPostByPostID(UUID postID) {
+        List<PostDTO> newPostListExample = new ArrayList<>();
+        PostDTO newPostExample = new PostDTO();
+        List<Comment> newCommentList = new ArrayList<>();
+        Comment newComment = new Comment();
+        newCommentList.add(newComment);
+        newPostExample.setComment(newCommentList);
         newPostExample.setFieldID("wdwdwrrrrwewdsds");
         newPostExample.setPostDiscription("wewedefeefe");
         newPostExample.setPostID(postID);

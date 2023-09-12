@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jirawat.askseniorpostservice.DTOs.PostDTO;
 import com.jirawat.askseniorpostservice.DTOs.ResponseDTO;
 import com.jirawat.askseniorpostservice.Entities.Comment;
 import com.jirawat.askseniorpostservice.Entities.Post;
@@ -45,9 +46,9 @@ public class PostController {
     }
 
     @GetMapping(path = "/{postID}")
-    public ResponseEntity<ResponseDTO<List<Post>, String>> getPostByPostID(@PathVariable("postID") UUID postID) {
+    public ResponseEntity<ResponseDTO<List<PostDTO>, String>> getPostByPostID(@PathVariable("postID") UUID postID) {
         log.info("get postByPostID controller with userID : {}", postID);
-        List<Post> newPostListExample = postService.getPostByPostID(postID);
+        List<PostDTO> newPostListExample = postService.getPostByPostID(postID);
         return new ResponseEntity<>(new ResponseDTO<>(newPostListExample, null), HttpStatus.OK);
     }
 
