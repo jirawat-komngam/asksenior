@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jirawat.askseniorpostservice.DTOs.ResponseDTO;
+import com.jirawat.askseniorpostservice.Entities.Comment;
 import com.jirawat.askseniorpostservice.Entities.Post;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +24,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping(path = "/api/v1/posts")
 public class PostController {
-    @GetMapping(path = "/user/{userEmail}")
-    public ResponseEntity<ResponseDTO<List<Post>, String>> getPostByUserID(@PathVariable("userEmail") String userID) {
-        log.info("get postByUserID controller with userEmail : {}", userID);
+    @GetMapping(path = "/user/{userID}")
+    public ResponseEntity<ResponseDTO<List<Post>, String>> getPostByUserID(@PathVariable("userID") String userID) {
+        log.info("get postByUserID controller with userID : {}", userID);
         List<Post> newPostListExample = new ArrayList<>();
         Post newPostExample = new Post();
         UUID uuid = UUID.randomUUID();
@@ -60,8 +61,9 @@ public class PostController {
         return new ResponseEntity<>(new ResponseDTO<>("ok", null), HttpStatus.OK);
     }
 
-    @PostMapping(path = "/")
-    public ResponseEntity<ResponseDTO<String, String>> postComment(@RequestBody Post newPost) {
+    @PostMapping(path = "/{postID}/comment")
+    public ResponseEntity<ResponseDTO<String, String>> postComment(
+            @PathVariable("postID") String postID, @RequestBody Comment newComment) {
         return new ResponseEntity<>(new ResponseDTO<>("ok", null), HttpStatus.OK);
     }
 
