@@ -94,4 +94,9 @@ public class PostService {
         System.out.println("create post");
     }
 
+    public void createComment(UUID postID, Comment comment) {
+        List<Post> getPost = postRepository.findByPostID(postID);
+
+    }
+
 }

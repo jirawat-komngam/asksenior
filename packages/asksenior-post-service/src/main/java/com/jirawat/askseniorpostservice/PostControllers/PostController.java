@@ -59,7 +59,7 @@ public class PostController {
 
     @PostMapping(path = "/{postID}/comment")
     public ResponseEntity<ResponseDTO<String, String>> postComment(
-            @PathVariable("postID") String postID, @RequestBody Comment newComment) {
+            @PathVariable("postID") UUID postID, @RequestBody Comment newComment) {
         return new ResponseEntity<>(new ResponseDTO<>("ok", null), HttpStatus.OK);
     }
 
