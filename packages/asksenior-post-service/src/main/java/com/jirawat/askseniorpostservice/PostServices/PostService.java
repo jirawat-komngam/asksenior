@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.support.Repositories;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -52,20 +51,22 @@ public class PostService {
     }
 
     public List<PostDTO> getPostByFieldID(String fieldID) {
-        UUID uuid = UUID.randomUUID();
-        List<PostDTO> newPostListExample = new ArrayList<>();
-        PostDTO newPostExample = new PostDTO();
-        List<Comment> newCommentList = new ArrayList<>();
-        Comment newComment = new Comment();
-        newCommentList.add(newComment);
-        newPostExample.setComments(newCommentList);
-        newPostExample.setFieldID("wdwdwrrrrwewdsds");
-        newPostExample.setPostDiscription("wewedefeefe");
-        newPostExample.setPostID(uuid);
-        newPostExample.setPostTitle("wdwdwrrrr");
-        newPostExample.setUserID("dedesdw");
-        newPostListExample.add(newPostExample);
-        return newPostListExample;
+        List<PostDTO> output = new ArrayList<>();
+        List<Post> getPost = postRepository.findByFieldID(fieldID);
+        for (Post eachPost : getPost) {
+            try {
+                var postDTO = mapPostToPostDTO(eachPost);
+                output.add(postDTO);
+            } catch (JsonMappingException e) {
+
+                e.printStackTrace();
+            } catch (JsonProcessingException e) {
+
+                e.printStackTrace();
+            }
+        }
+
+        return output;
     }
 
     public List<PostDTO> getPostByUserID(String userID) {
