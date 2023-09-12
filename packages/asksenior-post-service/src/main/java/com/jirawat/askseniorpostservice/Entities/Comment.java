@@ -13,6 +13,6 @@ public class Comment {
     private UUID commentID;
     private Integer userYear;
     private String userID;
-    private String field;
+    private String fieldID;
     private String commentContent;
 }
