@@ -15,9 +15,9 @@ import lombok.Setter;
 public class Post {
     private UUID postID;
     private String comment;
-    private String fieldID;
+    private UUID fieldID;
     private String postDiscription;
     private String postTitle;
-    private String userID;
+    private UUID userID;
     private String userName;
 }
