@@ -30,19 +30,10 @@ public class PostController {
     private PostService postService;
 
     @GetMapping(path = "/user/{userID}")
-    public ResponseEntity<ResponseDTO<List<Post>, String>> getPostByUserID(@PathVariable("userID") String userID) {
+    public ResponseEntity<ResponseDTO<List<PostDTO>, String>> getPostByUserID(@PathVariable("userID") String userID) {
         log.info("get postByUserID controller with userID : {}", userID);
-        List<Post> newPostListExample = new ArrayList<>();
-        Post newPostExample = new Post();
-        UUID uuid = UUID.randomUUID();
-        newPostExample.setComment("asdasdasdweee");
-        newPostExample.setFieldID("wdwdwrrrrwewdsds");
-        newPostExample.setPostDiscription("wewedefeefe");
-        newPostExample.setPostID(uuid);
-        newPostExample.setPostTitle("wdwdwrrrr");
-        newPostExample.setUserID(userID);
-        newPostListExample.add(newPostExample);
-        return new ResponseEntity<>(new ResponseDTO<>(newPostListExample, null), HttpStatus.OK);
+        List<PostDTO> getPostByUserID = postService.getPostByUserID(userID);
+        return new ResponseEntity<>(new ResponseDTO<>(getPostByUserID, null), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{postID}")
