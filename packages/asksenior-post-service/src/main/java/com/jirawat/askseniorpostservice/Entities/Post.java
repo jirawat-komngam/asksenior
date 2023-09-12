@@ -17,7 +17,7 @@ public class Post {
     @Id
     private UUID postID;
     private String comments;
-    private String fieldID;
+    private UUID fieldID;
     private String postDescription;
     private String postTitle;
     private String userID;
