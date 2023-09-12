@@ -8,8 +8,10 @@ import com.jirawat.askseniorpostservice.Entities.Post;
 import java.util.List;
 
 public interface PostRepository extends CrudRepository<Post, UUID> {
-    Post findByFieldID(String fieldID);
+    List<Post> findByFieldID(String fieldID);
 
     List<Post> findByUserID(String userID);
+
+    List<Post> findByPostID(UUID postID);
 
 }
