@@ -4,10 +4,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jirawat.askseniorpostservice.DTOs.ResponseDTO;
+import com.jirawat.askseniorpostservice.Entities.Post;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +22,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping(path = "/api/v1/posts")
 public class PostController {
     @GetMapping(path = "/user/{userEmail}")
-    public ResponseEntity<ResponseDTO<String, String>> getPostByUserID(@PathVariable("userEmail") String userEmail) {
-        log.info("get postByUserID controller with userEmail : {}", userEmail);
-        return new ResponseEntity<>(new ResponseDTO<>("OK", null), HttpStatus.OK);
+    public ResponseEntity<ResponseDTO<List<Post>, String>> getPostByUserID(@PathVariable("userEmail") String userID) {
+        log.info("get postByUserID controller with userEmail : {}", userID);
+        List<Post> newPostListExample = new ArrayList<>();
+        Post newPostExample = new Post();
+        UUID uuid = UUID.randomUUID();
+        newPostExample.setComment("asdasdasdweee");
+        newPostExample.setFieldID("wdwdwrrrrwewdsds");
+        newPostExample.setPostDiscription("wewedefeefe");
+        newPostExample.setPostID(uuid);
+        newPostExample.setPostTitle("wdwdwrrrr");
+        newPostExample.setUserID(userID);
+        newPostListExample.add(newPostExample);
+        return new ResponseEntity<>(new ResponseDTO<>(newPostListExample, null), HttpStatus.OK);
     }
 
 }
