@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Slf4j
 @RestController
@@ -51,6 +53,13 @@ public class PostController {
         newPostExample.setUserID("12345dadwad");
         newPostListExample.add(newPostExample);
         return new ResponseEntity<>(new ResponseDTO<>(newPostListExample, null), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "path")
+    public ResponseEntity<ResponseDTO<String, String>> postMethodName(@RequestBody Post post) {
+        // TODO: process POST request
+
+        return new ResponseEntity<>(new ResponseDTO<>("ok", null), HttpStatus.OK);
     }
 
 }
