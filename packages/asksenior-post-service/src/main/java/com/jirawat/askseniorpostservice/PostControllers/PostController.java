@@ -40,6 +40,21 @@ public class PostController {
         return new ResponseEntity<>(new ResponseDTO<>(newPostListExample, null), HttpStatus.OK);
     }
 
+    @GetMapping(path = "/{postID}")
+    public ResponseEntity<ResponseDTO<List<Post>, String>> getPostByPostID(@PathVariable("postID") UUID postID) {
+        log.info("get postByPostID controller with userID : {}", postID);
+        List<Post> newPostListExample = new ArrayList<>();
+        Post newPostExample = new Post();
+        newPostExample.setComment("asdasdasdweee");
+        newPostExample.setFieldID("wdwdwrrrrwewdsds");
+        newPostExample.setPostDiscription("wewedefeefe");
+        newPostExample.setPostID(postID);
+        newPostExample.setPostTitle("wdwdwrrrr");
+        newPostExample.setUserID("dedesdw");
+        newPostListExample.add(newPostExample);
+        return new ResponseEntity<>(new ResponseDTO<>(newPostListExample, null), HttpStatus.OK);
+    }
+
     @GetMapping(path = "/field/{fieldID}")
     public ResponseEntity<ResponseDTO<List<Post>, String>> getPostByFieldID(@PathVariable("fieldID") String fieldID) {
         log.info("get postByUserID controller with userEmail : {}", fieldID);
