@@ -26,7 +26,7 @@ public class PostService {
     private PostRepository postRepository;
 
     private PostDTO mapPostToPostDTO(Post eachPost) throws JsonMappingException, JsonProcessingException {
-        PostDTO mappedPost = PostMapper.INSTANCE.universityToUniversityDTO(eachPost);
+        PostDTO mappedPost = PostMapper.INSTANCE.postToPostDTO(eachPost);
         CommentJoinPost commentJoinPost = JsonHelper.parse(eachPost.getComments(), CommentJoinPost.class);
         mappedPost.setComments(commentJoinPost.getComments());
         return mappedPost;
