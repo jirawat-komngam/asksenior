@@ -37,4 +37,20 @@ public class PostController {
         return new ResponseEntity<>(new ResponseDTO<>(newPostListExample, null), HttpStatus.OK);
     }
 
+    @GetMapping(path = "/field/{fieldID}")
+    public ResponseEntity<ResponseDTO<List<Post>, String>> getPostByFieldID(@PathVariable("fieldID") String fieldID) {
+        log.info("get postByUserID controller with userEmail : {}", fieldID);
+        List<Post> newPostListExample = new ArrayList<>();
+        Post newPostExample = new Post();
+        UUID uuid = UUID.randomUUID();
+        newPostExample.setComment("asdasdasdweee");
+        newPostExample.setFieldID(fieldID);
+        newPostExample.setPostDiscription("wewedefeefe");
+        newPostExample.setPostID(uuid);
+        newPostExample.setPostTitle("wdwdwrrrr");
+        newPostExample.setUserID("12345dadwad");
+        newPostListExample.add(newPostExample);
+        return new ResponseEntity<>(new ResponseDTO<>(newPostListExample, null), HttpStatus.OK);
+    }
+
 }
