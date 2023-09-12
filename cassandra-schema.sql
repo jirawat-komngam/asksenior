@@ -46,5 +46,6 @@ CREATE TABLE posts(
    comments VARCHAR,
    PRIMARY KEY (postID)
 );
+INSERT INTO posts (postid, posttitle, postdescription, userid, username, fieldid, comments) VALUES ('9384618f-6334-4b9f-a5ff-14e782073964', 'new post haha', 'sssssssssssssssssssssssssssssssswdwdwdfcvcvcssssss','8a271090-67d5-403b-994a-842f139aa7c3','test','106102ce-c670-446c-96b9-0375ba657632','{"comments": []}');
 CREATE INDEX ON posts (fieldID);
 CREATE INDEX ON posts (userID);
