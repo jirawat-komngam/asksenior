@@ -6,12 +6,24 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.jirawat.askseniorpostservice.DTOs.PostDTO;
 import com.jirawat.askseniorpostservice.Entities.Comment;
+import com.jirawat.askseniorpostservice.Entities.CommentJoinPost;
 import com.jirawat.askseniorpostservice.Entities.Post;
+import com.jirawat.askseniorpostservice.Helpers.JsonHelper;
+import com.jirawat.askseniorpostservice.Mapper.PostMapper;
 
 @Service
 public class PostService {
+
+    private PostDTO mapPostToPostDTO(Post eachPost) throws JsonMappingException, JsonProcessingException {
+        PostDTO mappedPost = PostMapper.INSTANCE.universityToUniversityDTO(eachPost);
+        CommentJoinPost commentJoinPost = JsonHelper.parse(eachPost.getComment(), CommentJoinPost.class);
+        mappedPost.setComments(commentJoinPost.getComments());
+        return mappedPost;
+    }
 
     public List<PostDTO> getPostByPostID(UUID postID) {
         List<PostDTO> newPostListExample = new ArrayList<>();
