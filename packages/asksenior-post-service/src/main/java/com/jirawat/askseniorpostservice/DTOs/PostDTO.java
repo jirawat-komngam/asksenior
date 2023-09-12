@@ -14,10 +14,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PostDTO {
     private UUID postID;
-    private String fieldID;
-    private String postDiscription;
+    private UUID fieldID;
+    private String postDescription;
     private String postTitle;
-    private String userID;
+    private UUID userID;
     private String userName;
     private List<Comment> comments;
 }

@@ -37,10 +37,14 @@ public class PostController {
     }
 
     @GetMapping(path = "/{postID}")
-    public ResponseEntity<ResponseDTO<List<PostDTO>, String>> getPostByPostID(@PathVariable("postID") UUID postID) {
+    public ResponseEntity<ResponseDTO<PostDTO, String>> getPostByPostID(@PathVariable("postID") UUID postID) {
         log.info("get postByPostID controller with userID : {}", postID);
-        List<PostDTO> newPostListExample = postService.getPostByPostID(postID);
+        PostDTO newPostListExample = postService.getPostByPostID(postID);
+        if (newPostListExample == null) {
+            return new ResponseEntity<>(new ResponseDTO<>(null, "this post not found"), HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(new ResponseDTO<>(newPostListExample, null), HttpStatus.OK);
+
     }
 
     @GetMapping(path = "/field/{fieldID}")
@@ -60,6 +64,7 @@ public class PostController {
     @PostMapping(path = "/{postID}/comment")
     public ResponseEntity<ResponseDTO<String, String>> postComment(
             @PathVariable("postID") UUID postID, @RequestBody Comment newComment) {
+        postService.createComment(postID, newComment);
         return new ResponseEntity<>(new ResponseDTO<>("ok", null), HttpStatus.OK);
     }
 

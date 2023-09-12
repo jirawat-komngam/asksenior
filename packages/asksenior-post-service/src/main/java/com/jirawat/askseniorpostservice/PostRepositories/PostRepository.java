@@ -12,6 +12,6 @@ public interface PostRepository extends CrudRepository<Post, UUID> {
 
     List<Post> findByUserID(String userID);
 
-    List<Post> findByPostID(UUID postID);
+    Post findByPostID(UUID postID);
 
 }
