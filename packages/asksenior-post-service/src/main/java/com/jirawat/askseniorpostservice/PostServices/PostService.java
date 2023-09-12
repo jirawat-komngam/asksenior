@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jirawat.askseniorpostservice.DTOs.PostDTO;
 import com.jirawat.askseniorpostservice.Entities.Comment;
+import com.jirawat.askseniorpostservice.Entities.Post;
 
 @Service
 public class PostService {
@@ -43,7 +44,8 @@ public class PostService {
         newPostListExample.add(newPostExample);
         return newPostListExample;
     }
-      public List<PostDTO> getPostByUserID(String userID) {
+
+    public List<PostDTO> getPostByUserID(String userID) {
         UUID uuid = UUID.randomUUID();
         List<PostDTO> newPostListExample = new ArrayList<>();
         PostDTO newPostExample = new PostDTO();
@@ -60,5 +62,8 @@ public class PostService {
         return newPostListExample;
     }
 
+    public void createPost(Post post) {
+        System.out.println("create post");
+    }
 
 }
