@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.jirawat.askseniorpostservice.DTOs.PostDTO;
 import com.jirawat.askseniorpostservice.Entities.Comment;
-import com.jirawat.askseniorpostservice.Entities.Post;
 
 @Service
 public class PostService {
