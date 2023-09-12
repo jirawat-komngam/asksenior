@@ -89,6 +89,8 @@ public class PostService {
     }
 
     public void createPost(Post post) {
+        post.setComments("{\"comments\": []}");
+        postRepository.save(post);
         System.out.println("create post");
     }
 
