@@ -27,4 +27,21 @@ public class PostService {
         newPostListExample.add(newPostExample);
         return newPostListExample;
     }
+
+    public List<PostDTO> getPostByFieldID(String fieldID) {
+        UUID uuid = UUID.randomUUID();
+        List<PostDTO> newPostListExample = new ArrayList<>();
+        PostDTO newPostExample = new PostDTO();
+        List<Comment> newCommentList = new ArrayList<>();
+        Comment newComment = new Comment();
+        newCommentList.add(newComment);
+        newPostExample.setComment(newCommentList);
+        newPostExample.setFieldID("wdwdwrrrrwewdsds");
+        newPostExample.setPostDiscription("wewedefeefe");
+        newPostExample.setPostID(uuid);
+        newPostExample.setPostTitle("wdwdwrrrr");
+        newPostExample.setUserID("dedesdw");
+        newPostListExample.add(newPostExample);
+        return newPostListExample;
+    }
 }
