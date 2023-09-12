@@ -12,13 +12,14 @@ import com.jirawat.askseniorpostservice.Entities.Post;
 
 @Service
 public class PostService {
+
     public List<PostDTO> getPostByPostID(UUID postID) {
         List<PostDTO> newPostListExample = new ArrayList<>();
         PostDTO newPostExample = new PostDTO();
         List<Comment> newCommentList = new ArrayList<>();
         Comment newComment = new Comment();
         newCommentList.add(newComment);
-        newPostExample.setComment(newCommentList);
+        newPostExample.setComments(newCommentList);
         newPostExample.setFieldID("wdwdwrrrrwewdsds");
         newPostExample.setPostDiscription("wewedefeefe");
         newPostExample.setPostID(postID);
@@ -35,7 +36,7 @@ public class PostService {
         List<Comment> newCommentList = new ArrayList<>();
         Comment newComment = new Comment();
         newCommentList.add(newComment);
-        newPostExample.setComment(newCommentList);
+        newPostExample.setComments(newCommentList);
         newPostExample.setFieldID("wdwdwrrrrwewdsds");
         newPostExample.setPostDiscription("wewedefeefe");
         newPostExample.setPostID(uuid);
@@ -52,7 +53,7 @@ public class PostService {
         List<Comment> newCommentList = new ArrayList<>();
         Comment newComment = new Comment();
         newCommentList.add(newComment);
-        newPostExample.setComment(newCommentList);
+        newPostExample.setComments(newCommentList);
         newPostExample.setFieldID("wdwdwrrrrwewdsds");
         newPostExample.setPostDiscription("wewedefeefe");
         newPostExample.setPostID(uuid);

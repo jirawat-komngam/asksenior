@@ -19,5 +19,5 @@ public class PostDTO {
     private String postTitle;
     private String userID;
     private String userName;
-    private List<Comment> comment;
+    private List<Comment> comments;
 }

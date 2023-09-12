@@ -12,6 +12,6 @@ public interface PostMapper {
 
     PostMapper INSTANCE = Mappers.getMapper(PostMapper.class);
 
-    @Mapping(target = "faculties", expression = "java(null)")
+    @Mapping(target = "comments", expression = "java(null)")
     PostDTO universityToUniversityDTO(Post post);
 }
