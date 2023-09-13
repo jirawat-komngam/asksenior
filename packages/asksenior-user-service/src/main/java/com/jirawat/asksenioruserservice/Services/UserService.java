@@ -32,8 +32,7 @@ public class UserService {
                 checkUniversityWord = true;
             }
         }
-        // logger.warn("Batch Response contained a response key not in request batch :
-        // {}", responseKey);
+
         log.info("check UniversityWord successfully and result is : {}", checkUniversityWord);
         return checkUniversityWord;
     }

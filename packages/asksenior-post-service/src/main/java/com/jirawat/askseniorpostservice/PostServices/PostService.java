@@ -1,9 +1,7 @@
 package com.jirawat.askseniorpostservice.PostServices;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,12 +103,11 @@ public class PostService {
         post.setPostID(uuid);
         post.setComments("{\"comments\": []}");
         postRepository.save(post);
-        System.out.println("create post");
+
     }
 
     public void createComment(UUID postID, Comment comment) {
         UUID uuid = UUID.randomUUID();
-        System.out.println("create comment");
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         Post getPost = postRepository.findByPostID(postID);
@@ -124,7 +121,7 @@ public class PostService {
                 String commentToString = mapper.writeValueAsString(getCommentObj);
                 getPost.setComments("{\"comments\":" + " " + commentToString + "}");
                 postRepository.save(getPost);
-                System.out.println(getPost.getComments());
+
             } catch (JsonMappingException e) {
 
                 e.printStackTrace();
