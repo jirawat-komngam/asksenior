@@ -17,6 +17,27 @@ const resolvers: Resolvers = {
             )
             return apiAxiosResult.data.data
         },
+
+        async postByID(_, args, gatewayContext) {
+            const apiAxiosResult = await axios.get(
+                `${process.env.POST_SERVICE_HOST}/api/v1/posts/` + args.postID
+            )
+            return apiAxiosResult.data.data
+        },
+        async postByFieldID(_, args, gatewayContext) {
+            const apiAxiosResult = await axios.get(
+                `${process.env.POST_SERVICE_HOST}/api/v1/posts/field/` +
+                    args.fieldID
+            )
+            return apiAxiosResult.data.data
+        },
+        async postByUserID(_, args, gatewayContext) {
+            const apiAxiosResult = await axios.get(
+                `${process.env.POST_SERVICE_HOST}/api/v1/posts/user/` +
+                    args.userID
+            )
+            return apiAxiosResult.data.data
+        },
     },
 }
 
