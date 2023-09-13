@@ -101,4 +101,25 @@ public class UserService {
         return verified;
     }
 
+    public User updateUserInformation(UUID userID, Integer userYear, String fieldID, String userName) {
+        log.info("update user information by userID {} year = {} , fieldID = {} , userName = {} ", userID, userYear,
+                fieldID, userName);
+
+        User findUser = repository.findByUserID(userID);
+        log.info("found user by userID {} year = {} , fieldID = {} , userName = {} ", userID, userYear,
+                fieldID, userName);
+
+        if (findUser != null) {
+            findUser.setFieldID(fieldID);
+            findUser.setUserYear(userYear);
+            findUser.setUserName(userName);
+            repository.save(findUser);
+            log.info("update user complete with userID {} year = {} , fieldID = {} , userName = {} ", userID, userYear,
+                    fieldID, userName);
+            return findUser;
+        }
+        log.warn("don't found this userID in users", userID);
+        return null;
+    }
+
 }
