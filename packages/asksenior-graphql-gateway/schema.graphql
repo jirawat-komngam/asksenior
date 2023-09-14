@@ -6,6 +6,12 @@ type Query {
 }
 type Mutation {
     login(userEmail: String!): String
+    updateUserInformation(
+        userID: String!
+        fieldID: String!
+        userName: String!
+        userYear: Int!
+    ): String
     verifiedOTP(otp: String!, userEmail: String!): String
     createPost(
         fieldID: String!
