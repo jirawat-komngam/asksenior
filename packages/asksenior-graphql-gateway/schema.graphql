@@ -14,6 +14,13 @@ type Mutation {
         userID: String!
         userName: String!
     ): String
+    createComment(
+        postID: String!
+        userYear: Int!
+        userID: String!
+        fieldID: String!
+        commentContent: String!
+    ): String
 }
 
 type University {

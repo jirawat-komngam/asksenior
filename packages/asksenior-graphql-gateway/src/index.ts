@@ -94,6 +94,28 @@ const resolvers: Resolvers = {
                 })
             }
         },
+        createComment: async (root, args, context) => {
+            try {
+                const apiAxiosResult = await axios.post(
+                    `${process.env.POST_SERVICE_HOST}/api/v1/posts/` +
+                        args.postID +
+                        '/comment',
+                    {
+                        userYear: args.userYear,
+                        userID: args.userID,
+                        fieldID: args.fieldID,
+                        commentContent: args.commentContent,
+                    }
+                )
+                return 'done'
+            } catch (error) {
+                throw new GraphQLError(error.response.data.error, {
+                    extensions: {
+                        code: error.response.status,
+                    },
+                })
+            }
+        },
     },
 }
 
