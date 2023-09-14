@@ -24,6 +24,7 @@ const resolvers: Resolvers = {
             )
             return apiAxiosResult.data.data
         },
+
         async postByFieldID(_, args, gatewayContext) {
             const apiAxiosResult = await axios.get(
                 `${process.env.POST_SERVICE_HOST}/api/v1/posts/field/` +
@@ -31,6 +32,7 @@ const resolvers: Resolvers = {
             )
             return apiAxiosResult.data.data
         },
+
         async postByUserID(_, args, gatewayContext) {
             const apiAxiosResult = await axios.get(
                 `${process.env.POST_SERVICE_HOST}/api/v1/posts/user/` +
@@ -55,6 +57,7 @@ const resolvers: Resolvers = {
                 })
             }
         },
+
         updateUserInformation: async (root, args, context) => {
             try {
                 const apiAxiosResult = await axios.put(
@@ -75,6 +78,7 @@ const resolvers: Resolvers = {
                 })
             }
         },
+
         verifiedOTP: async (root, args, context) => {
             try {
                 const apiAxiosResult = await axios.post(
@@ -93,6 +97,7 @@ const resolvers: Resolvers = {
                 })
             }
         },
+
         createPost: async (root, args, context) => {
             try {
                 const apiAxiosResult = await axios.post(
@@ -114,6 +119,7 @@ const resolvers: Resolvers = {
                 })
             }
         },
+
         createComment: async (root, args, context) => {
             try {
                 const apiAxiosResult = await axios.post(
