@@ -6,7 +6,7 @@ import axios from 'axios'
 import loadDotEnvConfig from './configs/dotenv-config.js'
 import loadLoggerConfig from './configs/logger-config.js'
 import { extractTokenFromHeader } from './helpers/context-helper.js'
-
+import { GraphQLError } from 'graphql'
 const typeDefs = readFileSync('./schema.graphql', { encoding: 'utf-8' })
 
 const resolvers: Resolvers = {
@@ -37,6 +37,23 @@ const resolvers: Resolvers = {
                     args.userID
             )
             return apiAxiosResult.data.data
+        },
+    },
+    Mutation: {
+        login: async (root, args, context) => {
+            try {
+                const apiAxiosResult = await axios.get(
+                    `${process.env.USER_SERVICE_HOST}/api/v1/users/email/` +
+                        args.userEmail
+                )
+                return 'done'
+            } catch (error) {
+                throw new GraphQLError(error.response.data.error, {
+                    extensions: {
+                        code: error.response.status,
+                    },
+                })
+            }
         },
     },
 }

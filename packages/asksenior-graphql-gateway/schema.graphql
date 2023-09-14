@@ -4,6 +4,9 @@ type Query {
     postByFieldID(fieldID: String!): [Post!]!
     postByUserID(userID: String!): [Post!]!
 }
+type Mutation {
+    login(userEmail: String!): String
+}
 
 type University {
     universityID: ID!

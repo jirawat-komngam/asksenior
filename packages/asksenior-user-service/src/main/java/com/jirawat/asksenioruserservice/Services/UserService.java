@@ -25,6 +25,10 @@ public class UserService {
         Boolean checkUniversityWord = false;
         if (userEmail != null) {
             String[] splittedMail = userEmail.split("@");
+            if (splittedMail.length == 1) {
+                return false;
+            }
+
             String emailDomain = splittedMail[1];
             if (emailDomain.contains("chula") || emailDomain.contains("kmutt") || emailDomain.contains("kmitl")
                     || emailDomain.contains("ku")
