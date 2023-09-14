@@ -73,6 +73,27 @@ const resolvers: Resolvers = {
                 })
             }
         },
+        createPost: async (root, args, context) => {
+            try {
+                const apiAxiosResult = await axios.post(
+                    `${process.env.POST_SERVICE_HOST}/api/v1/posts/`,
+                    {
+                        fieldID: args.fieldID,
+                        postDescription: args.postDescription,
+                        postTitle: args.postTitle,
+                        userID: args.userID,
+                        userName: args.userName,
+                    }
+                )
+                return 'done'
+            } catch (error) {
+                throw new GraphQLError(error.response.data.error, {
+                    extensions: {
+                        code: error.response.status,
+                    },
+                })
+            }
+        },
     },
 }
 
