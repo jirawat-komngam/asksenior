@@ -6,6 +6,7 @@ type Query {
 }
 type Mutation {
     login(userEmail: String!): String
+    verifiedOTP(otp: String!, userEmail: String!): String
 }
 
 type University {

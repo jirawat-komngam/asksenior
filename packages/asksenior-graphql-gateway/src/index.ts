@@ -55,6 +55,24 @@ const resolvers: Resolvers = {
                 })
             }
         },
+        verifiedOTP: async (root, args, context) => {
+            try {
+                const apiAxiosResult = await axios.post(
+                    `${process.env.USER_SERVICE_HOST}/api/v1/users/`,
+                    {
+                        OTP: args.otp,
+                        userEmail: args.userEmail,
+                    }
+                )
+                return 'done'
+            } catch (error) {
+                throw new GraphQLError(error.response.data.error, {
+                    extensions: {
+                        code: error.response.status,
+                    },
+                })
+            }
+        },
     },
 }
 
