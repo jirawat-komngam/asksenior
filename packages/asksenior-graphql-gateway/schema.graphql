@@ -1,5 +1,32 @@
 type Query {
     universities: [University!]!
+    postByID(postID: String!): Post!
+    postByFieldID(fieldID: String!): [Post!]!
+    postByUserID(userID: String!): [Post!]!
+}
+type Mutation {
+    login(userEmail: String!): String
+    updateUserInformation(
+        userID: String!
+        fieldID: String!
+        userName: String!
+        userYear: Int!
+    ): String
+    verifiedOTP(otp: String!, userEmail: String!): String
+    createPost(
+        fieldID: String!
+        postDescription: String!
+        postTitle: String!
+        userID: String!
+        userName: String!
+    ): String
+    createComment(
+        postID: String!
+        userYear: Int!
+        userID: String!
+        fieldID: String!
+        commentContent: String!
+    ): String
 }
 
 type University {
@@ -8,6 +35,23 @@ type University {
     universityShortName: String!
     universityOrder: Int!
     faculties: [Faculty!]!
+}
+
+type Post {
+    postID: ID
+    comments: [Comment!]
+    fieldID: ID
+    postDescription: String!
+    postTitle: String!
+    userID: ID!
+    userName: String!
+}
+type Comment {
+    commentID: ID
+    userYear: String
+    userID: String
+    fieldID: String
+    commentContent: String
 }
 
 type Faculty {

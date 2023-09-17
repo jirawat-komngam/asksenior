@@ -6,7 +6,7 @@ import axios from 'axios'
 import loadDotEnvConfig from './configs/dotenv-config.js'
 import loadLoggerConfig from './configs/logger-config.js'
 import { extractTokenFromHeader } from './helpers/context-helper.js'
-
+import { GraphQLError } from 'graphql'
 const typeDefs = readFileSync('./schema.graphql', { encoding: 'utf-8' })
 
 const resolvers: Resolvers = {
@@ -16,6 +16,131 @@ const resolvers: Resolvers = {
                 `${process.env.UNIVERSITY_SERVICE_HOST}/api/v1/universities`
             )
             return apiAxiosResult.data.data
+        },
+
+        async postByID(_, args, gatewayContext) {
+            const apiAxiosResult = await axios.get(
+                `${process.env.POST_SERVICE_HOST}/api/v1/posts/` + args.postID
+            )
+            return apiAxiosResult.data.data
+        },
+
+        async postByFieldID(_, args, gatewayContext) {
+            const apiAxiosResult = await axios.get(
+                `${process.env.POST_SERVICE_HOST}/api/v1/posts/field/` +
+                    args.fieldID
+            )
+            return apiAxiosResult.data.data
+        },
+
+        async postByUserID(_, args, gatewayContext) {
+            const apiAxiosResult = await axios.get(
+                `${process.env.POST_SERVICE_HOST}/api/v1/posts/user/` +
+                    args.userID
+            )
+            return apiAxiosResult.data.data
+        },
+    },
+    Mutation: {
+        login: async (root, args, context) => {
+            try {
+                const apiAxiosResult = await axios.get(
+                    `${process.env.USER_SERVICE_HOST}/api/v1/users/email/` +
+                        args.userEmail
+                )
+                return 'done'
+            } catch (error) {
+                throw new GraphQLError(error.response.data.error, {
+                    extensions: {
+                        code: error.response.status,
+                    },
+                })
+            }
+        },
+
+        updateUserInformation: async (root, args, context) => {
+            try {
+                const apiAxiosResult = await axios.put(
+                    `${process.env.USER_SERVICE_HOST}/api/v1/users/email/` +
+                        args.userEmail,
+                    {
+                        userName: args.userName,
+                        userYear: args.userYear,
+                        fieldID: args.fieldID,
+                    }
+                )
+                return 'done'
+            } catch (error) {
+                throw new GraphQLError(error.response.data.error, {
+                    extensions: {
+                        code: error.response.status,
+                    },
+                })
+            }
+        },
+
+        verifiedOTP: async (root, args, context) => {
+            try {
+                const apiAxiosResult = await axios.post(
+                    `${process.env.USER_SERVICE_HOST}/api/v1/users/`,
+                    {
+                        OTP: args.otp,
+                        userEmail: args.userEmail,
+                    }
+                )
+                return 'done'
+            } catch (error) {
+                throw new GraphQLError(error.response.data.error, {
+                    extensions: {
+                        code: error.response.status,
+                    },
+                })
+            }
+        },
+
+        createPost: async (root, args, context) => {
+            try {
+                const apiAxiosResult = await axios.post(
+                    `${process.env.POST_SERVICE_HOST}/api/v1/posts/`,
+                    {
+                        fieldID: args.fieldID,
+                        postDescription: args.postDescription,
+                        postTitle: args.postTitle,
+                        userID: args.userID,
+                        userName: args.userName,
+                    }
+                )
+                return 'done'
+            } catch (error) {
+                throw new GraphQLError(error.response.data.error, {
+                    extensions: {
+                        code: error.response.status,
+                    },
+                })
+            }
+        },
+
+        createComment: async (root, args, context) => {
+            try {
+                const apiAxiosResult = await axios.post(
+                    `${process.env.POST_SERVICE_HOST}/api/v1/posts/` +
+                        args.postID +
+                        '/comment',
+                    {
+                        userYear: args.userYear,
+                        userID: args.userID,
+                        fieldID: args.fieldID,
+                        commentContent: args.commentContent,
+                    }
+                )
+                return 'done'
+            } catch (error) {
+                throw new GraphQLError(error.response.data.error, {
+                    extensions: {
+                        code: error.response.status,
+                    },
+                })
+            }
         },
     },
 }

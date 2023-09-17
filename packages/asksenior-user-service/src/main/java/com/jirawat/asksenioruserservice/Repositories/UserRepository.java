@@ -8,4 +8,6 @@ import com.jirawat.asksenioruserservice.Entities.User;
 
 public interface UserRepository extends CrudRepository<User, UUID> {
     User findByUserEmail(String userEmail);
+
+    User findByUserID(UUID userID);
 }

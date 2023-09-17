@@ -25,6 +25,10 @@ public class UserService {
         Boolean checkUniversityWord = false;
         if (userEmail != null) {
             String[] splittedMail = userEmail.split("@");
+            if (splittedMail.length == 1) {
+                return false;
+            }
+
             String emailDomain = splittedMail[1];
             if (emailDomain.contains("chula") || emailDomain.contains("kmutt") || emailDomain.contains("kmitl")
                     || emailDomain.contains("ku")
@@ -32,8 +36,7 @@ public class UserService {
                 checkUniversityWord = true;
             }
         }
-        // logger.warn("Batch Response contained a response key not in request batch :
-        // {}", responseKey);
+
         log.info("check UniversityWord successfully and result is : {}", checkUniversityWord);
         return checkUniversityWord;
     }
@@ -100,6 +103,27 @@ public class UserService {
 
         log.info("verify value is {}", verified);
         return verified;
+    }
+
+    public User updateUserInformation(UUID userID, Integer userYear, String fieldID, String userName) {
+        log.info("update user information by userID {} year = {} , fieldID = {} , userName = {} ", userID, userYear,
+                fieldID, userName);
+
+        User findUser = repository.findByUserID(userID);
+        log.info("found user by userID {} year = {} , fieldID = {} , userName = {} ", userID, userYear,
+                fieldID, userName);
+
+        if (findUser != null) {
+            findUser.setFieldID(fieldID);
+            findUser.setUserYear(userYear);
+            findUser.setUserName(userName);
+            repository.save(findUser);
+            log.info("update user complete with userID {} year = {} , fieldID = {} , userName = {} ", userID, userYear,
+                    fieldID, userName);
+            return findUser;
+        }
+        log.warn("don't found this userID in users", userID);
+        return null;
     }
 
 }
