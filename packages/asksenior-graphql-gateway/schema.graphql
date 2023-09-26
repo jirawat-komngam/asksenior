@@ -1,13 +1,12 @@
 type Query {
     universities: [University!]!
-    postByID(postID: String!): Post!
+    postByID(postID: String!): Post
     postByFieldID(fieldID: String!): [Post!]!
-    postByUserID(userID: String!): [Post!]!
+    postByUserID: [Post!]!
 }
 type Mutation {
     login(userEmail: String!): String
     updateUserInformation(
-        userID: String!
         fieldID: String!
         userName: String!
         userYear: Int!
@@ -17,13 +16,11 @@ type Mutation {
         fieldID: String!
         postDescription: String!
         postTitle: String!
-        userID: String!
         userName: String!
     ): String
     createComment(
         postID: String!
         userYear: Int!
-        userID: String!
         fieldID: String!
         commentContent: String!
     ): String

@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jirawat.asksenioruserservice.DTOs.JWTBodyDTO;
 import com.jirawat.asksenioruserservice.Entities.User;
 import com.jirawat.asksenioruserservice.Helpers.OTPGeneratorHelper;
 import com.jirawat.asksenioruserservice.Repositories.UserRepository;
@@ -16,6 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class UserService {
+    @Autowired
+    private JWTService jwtService;
+
     @Autowired
     private UserRepository repository;
 
@@ -57,11 +61,19 @@ public class UserService {
         log.info("send otp : {} to email : {} success", otp, userEmail);
     }
 
-    public void signToken(String userEmail) {
-        UUID getUserID = repository.findByUserEmail(userEmail).getUserID();
-        if (getUserID != null) {
+    public String signToken(String userEmail) throws Exception {
+        log.info("sign token by user email : {}", userEmail);
 
+        User user = repository.findByUserEmail(userEmail);
+        if (user == null) {
+            var errorMessage = String.format("could not find user by user email %s", userEmail);
+            log.error(errorMessage);
+            throw new Exception(errorMessage);
         }
+
+        var jwtToken = jwtService.generateJwtToken(new JWTBodyDTO(user.getUserID().toString(), user.getUserEmail()));
+        log.info("sign token by user email : {} success", userEmail);
+        return jwtToken;
     }
 
     public void upsertUser(String userEmail) {
@@ -105,14 +117,13 @@ public class UserService {
         return verified;
     }
 
-    public User updateUserInformation(UUID userID, Integer userYear, String fieldID, String userName) {
+    public User updateUserInformation(UUID userID, Integer userYear, UUID fieldID, String userName) {
         log.info("update user information by userID {} year = {} , fieldID = {} , userName = {} ", userID, userYear,
                 fieldID, userName);
 
         User findUser = repository.findByUserID(userID);
         log.info("found user by userID {} year = {} , fieldID = {} , userName = {} ", userID, userYear,
                 fieldID, userName);
-
         if (findUser != null) {
             findUser.setFieldID(fieldID);
             findUser.setUserYear(userYear);
@@ -122,8 +133,8 @@ public class UserService {
                     fieldID, userName);
             return findUser;
         }
+
         log.warn("don't found this userID in users", userID);
         return null;
     }
-
 }

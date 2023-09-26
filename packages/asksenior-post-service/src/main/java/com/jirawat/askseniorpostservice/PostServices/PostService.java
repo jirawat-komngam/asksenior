@@ -19,7 +19,6 @@ import com.jirawat.askseniorpostservice.Helpers.JsonHelper;
 import com.jirawat.askseniorpostservice.Mapper.PostMapper;
 import com.jirawat.askseniorpostservice.PostRepositories.PostRepository;
 
-import lombok.var;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

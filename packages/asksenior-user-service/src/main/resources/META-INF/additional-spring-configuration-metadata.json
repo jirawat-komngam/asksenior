@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "secret",
+    "type": "java.lang.String",
+    "description": "JWT secret injected from system environment variable name JWT_SECRET"
+  },
+  {
+    "name": "tokenValidityInSeconds",
+    "type": "java.lang.Integer",
+    "description": "TTL of the JWT token in seconds"
+  }
+]}

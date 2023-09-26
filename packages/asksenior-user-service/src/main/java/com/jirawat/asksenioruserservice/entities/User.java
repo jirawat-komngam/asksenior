@@ -19,5 +19,5 @@ public class User {
     private String userName;
     private String userEmail;
     private Integer userYear;
-    private String fieldID;
+    private UUID fieldID;
 }

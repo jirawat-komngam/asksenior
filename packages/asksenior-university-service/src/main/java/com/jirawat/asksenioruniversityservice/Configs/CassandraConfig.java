@@ -10,7 +10,7 @@ class ApplicationConfig extends AbstractCassandraConfiguration {
 
     @Override
     public String getContactPoints() {
-        return "localhost";
+        return "cassandra";
     }
 
     @Override
