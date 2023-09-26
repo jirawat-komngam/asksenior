@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@500;700');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    text-rendering: optimizeLegibility;
+    font-family: 'Noto Sans Thai' !important;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700 !important;
+}
+
+h3 {
+    font-size: 18px !important;
+}
+
+.cursor-grab::-webkit-scrollbar { 
+    display: none; 
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+}
+
+.swal-overlay,
+.chakra-modal__overlay {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}

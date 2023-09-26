@@ -1,0 +1,45 @@
+# ONLY USE DOCKER COMPOSE FOR LOCAL ENV
+# In production, we use Kubernetes
+version: "3"
+services:
+  cassandra:
+    image: cassandra:4.0
+    ports:
+      - 9042:9042
+    volumes:
+      - ~/apps/cassandra:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=cloudinfra
+  university-service:
+    image: dmitdockerhub/university-service:latest
+    ports:
+      - 8000:8000
+    depends_on:
+      - cassandra
+  user-service:
+    image: dmitdockerhub/user-service:latest
+    ports:
+      - 9000:9000
+    environment:
+      - JWT_SECRET=aGFoYTEyMw==
+    depends_on:
+      - cassandra
+  post-service:
+    image: dmitdockerhub/post-service:latest
+    ports:
+      - 7000:7000
+    depends_on:
+      - cassandra
+  graphql-gateway:
+    image: dmitdockerhub/graphql-gateway:latest
+    ports:
+      - 4000:4000
+    environment:
+      - JWT_SECRET=aGFoYTEyMw==
+      - NODE_ENV=production
+  frontend:
+    image: dmitdockerhub/frontend:latest
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=production

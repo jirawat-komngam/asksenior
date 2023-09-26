@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.jirawat.asksenioruserservice.DTOs.ResponseDTO;
 import com.jirawat.asksenioruserservice.Entities.User;
 import com.jirawat.asksenioruserservice.RequestBodyPOJOs.PostUserRequestBodyPOJO;
@@ -37,11 +38,18 @@ public class UserController {
         log.info("verified is : {}", verified);
         if (verified == true) {
             userService.upsertUser(postUserRequestBodyPOJO.getUserEmail());
-            userService.signToken(postUserRequestBodyPOJO.getUserEmail());
-            return new ResponseEntity<>(new ResponseDTO<>("OK", null), HttpStatus.OK);
+            try {
+                var jwtToken = userService.signToken(postUserRequestBodyPOJO.getUserEmail());
+                return new ResponseEntity<>(new ResponseDTO<>(jwtToken, null),
+                        HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(new ResponseDTO<>(null, e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
 
-        return new ResponseEntity<>(new ResponseDTO<>(null, "otp not found"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ResponseDTO<>(null, "invalid otp"),
+                HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping(path = "/email/{userEmail}")
